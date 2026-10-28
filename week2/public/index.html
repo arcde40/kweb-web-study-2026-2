@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="오늘의 날씨와 기분을 기록하는 나만의 일기장"
+    />
+    <title>하루 기록 | 나만의 일기장</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="하루 기록 홈">
+          <span class="brand-mark" aria-hidden="true">日</span>
+          <span>하루 기록</span>
+        </a>
+        <p class="topbar-note">나를 위한 작은 기록</p>
+      </header>
+
+      <section class="welcome">
+        <div>
+          <p class="eyebrow">MY DAILY JOURNAL</p>
+          <h1>오늘 하루를<br class="mobile-break" /> 기록해 보세요.</h1>
+          <p class="welcome-copy">
+            짧은 한 줄도 괜찮아요. 오늘의 마음을 천천히 적어보세요.
+          </p>
+        </div>
+        <div class="welcome-decoration" aria-hidden="true">
+          <span class="storm-bolt" aria-hidden="true">ϟ</span>
+          <span class="decoration-line"></span>
+          <span class="decoration-dot"></span>
+        </div>
+      </section>
+
+      <div class="content-grid">
+        <section class="panel editor-panel" aria-labelledby="editor-heading">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">WRITE</p>
+              <h2 id="editor-heading">오늘의 일기</h2>
+            </div>
+            <div class="date-controls">
+              <button class="today-link" id="today-button" type="button" hidden>
+                오늘로 돌아가기
+              </button>
+              <span class="date-pill" id="entry-date"></span>
+            </div>
+          </div>
+
+          <form id="diary-form">
+            <label class="field-label" for="weather">오늘의 날씨</label>
+            <input
+              id="weather"
+              name="weather"
+              type="text"
+              placeholder="예: 맑고 선선해요"
+              required
+            />
+
+            <label class="field-label" for="mood">오늘의 기분</label>
+            <input
+              id="mood"
+              name="mood"
+              type="text"
+              placeholder="예: 조금 설레고 편안해요"
+              required
+            />
+
+            <div class="content-label-row">
+              <label class="field-label" for="content">오늘의 기록</label>
+              <span class="character-count" id="character-count">0 / 500</span>
+            </div>
+            <textarea
+              id="content"
+              name="content"
+              rows="8"
+              placeholder="오늘 기억하고 싶은 순간을 적어보세요."
+              required
+            ></textarea>
+
+            <p class="form-message" id="form-message" role="status"></p>
+            <div class="form-actions">
+              <button class="button button-quiet" id="delete-button" type="button" hidden>
+                삭제
+              </button>
+              <button class="button button-primary" id="save-button" type="submit">
+                오늘의 일기 저장
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section class="panel list-panel" aria-labelledby="list-heading">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">YOUR MOMENTS</p>
+              <h2 id="list-heading">지난 기록</h2>
+            </div>
+            <span class="entry-total" id="entry-total">0개의 기록</span>
+          </div>
+          <div class="diary-list" id="diary-list" aria-live="polite"></div>
+          <div class="empty-state" id="empty-state">
+            <span class="empty-icon" aria-hidden="true">✎</span>
+            <p>아직 기록이 없어요.</p>
+            <span>오늘의 첫 페이지를 채워보세요.</span>
+          </div>
+        </section>
+      </div>
+
+      <footer>
+        <span>하루 기록</span>
+        <span>오늘의 마음을 담아두는 곳</span>
+      </footer>
+    </main>
+  </body>
+</html>
