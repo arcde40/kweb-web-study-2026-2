@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3f2ed">
+    <title>AI 에이전트 가이드</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+</head>
+<body>
+    <div class="page-shell">
+        <aside class="sidebar" aria-label="에이전트 메뉴">
+            <a class="brand" href="/" aria-label="에이전트 가이드 홈">
+                <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span>FIELDNOTES<span class="brand-sub">AI AGENT GUIDE</span></span>
+            </a>
+            <div class="nav-label">탐색</div>
+            <nav class="agent-nav">
+                <a href="/claude" data-route="claude"><span class="nav-dot claude-dot"></span>Claude <span class="nav-arrow">↗</span></a>
+                <a href="/codex" data-route="codex"><span class="nav-dot codex-dot"></span>Codex <span class="nav-arrow">↗</span></a>
+                <a href="/copilot" data-route="copilot"><span class="nav-dot copilot-dot"></span>Copilot <span class="nav-arrow">↗</span></a>
+            </nav>
+            <div class="sidebar-note">
+                <span class="live-dot"></span>
+                <span>세 가지 에이전트<br>한눈에 비교하기</span>
+            </div>
+            <div class="sidebar-foot">A SMALL GUIDE TO<br>YOUR NEXT BIG IDEA.</div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="breadcrumb"><span>가이드</span><span class="crumb-slash">/</span><span id="breadcrumb-current">전체 보기</span></div>
+                <div class="edition"><span class="edition-dot"></span> 에이전트 필드 가이드 <span class="edition-year">2026</span></div>
+            </header>
+            <div id="app" aria-live="polite"></div>
+            <footer class="page-footer"><span>필요한 일에 맞는 도구를 고르세요.</span><span>FIELDNOTES <span class="footer-mark">✳</span></span></footer>
+        </main>
+    </div>
+</body>
+</html>
