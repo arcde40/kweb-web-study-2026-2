@@ -5,11 +5,18 @@ const students = [
 ];
 
 function findStudent(name) {
-
+    for(let x = 0; x < students.length; x++) {
+        if(students[x].name === name) return students[x];
+    }
 }
 
 function findFirstPlace(scoreOf) {
-
+    let max = 0;
+    for(let x = 0; x < students.length; x++) {
+        let result = scoreOf(students[x]);
+        if (scoreOf(students[max])<result) max = x;
+    }
+    return students[max];
 }
 
 findFirstPlace(function(s) { return s.score.mid; });    // 중간고사 1등
@@ -17,5 +24,6 @@ findFirstPlace(function(s) { return s.score.final; });  // 기말고사 1등
 findFirstPlace(function(s) { return s.score.mid + s.score.final; }); // 총점 1등
 
 function addStudent(name, midScore, finalScore) {
+    students.push({name: name, score: {mid: midScore, final: finalScore}})
 
 }
