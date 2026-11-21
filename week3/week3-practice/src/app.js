@@ -1,9 +1,12 @@
-const express = require('express');
+   const express = require('express');
+const path = require('path');
 const postsRouter = require('./routes/posts');
 
 const app = express();
 
 app.use(express.json());
+// public/ 폴더의 화면(index.html)을 그대로 내보내기
+app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use('/posts', postsRouter);
 
 // 명세에 없는 경로

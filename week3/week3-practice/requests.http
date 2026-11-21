@@ -1,0 +1,20 @@
+### 글 목록 → 200
+GET http://localhost:3000/posts
+
+### 글 쓰기 → 201
+POST http://localhost:3000/posts
+Content-Type: application/json
+
+{ "author": "영민", "content": "안녕!" }
+
+### 빈 글 → 400
+POST http://localhost:3000/posts
+Content-Type: application/json
+
+{ "author": "영민", "content": "" }
+
+### 글 지우기 → 204 (위에서 만든 1번 글)
+DELETE http://localhost:3000/posts/1
+
+### 없는 글 지우기 → 404
+DELETE http://localhost:3000/posts/999

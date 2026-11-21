@@ -1,6 +1,7 @@
-# 3주차 샘플: 방명록 API
+# 3주차 과제: 방명록 서버
 
-`spec.md`의 명세를 Express로 구현한 예시입니다.
+2주차에 설계한 [`spec.md`](spec.md)를 Express로 구현했습니다.
+수업 시간에 한 실습은 [`week3-practice/`](week3-practice/)에 있습니다.
 
 ## 실행
 
@@ -11,19 +12,26 @@ npm start        # http://localhost:3000
 
 ## 확인하기
 
-- **손으로:** `requests.http`를 열고 각 `###` 위의 **Send Request**를 누르세요. (VS Code 확장 REST Client 필요)
+- **손으로:** `requests.http`를 열고 위에서부터 차례대로 Send Request (VS Code 확장 REST Client 필요)
 - **자동으로:** `npm test`
 
 ## 구조
 
 ```
-src/
-├── app.js            Express 앱 (미들웨어, 라우터 연결, 에러 처리)
-├── server.js         서버 실행
-├── routes/posts.js   /posts 경로 처리
-└── store/posts.js    글 저장 (메모리)
-test/
-└── posts.test.js     spec.md의 각 행을 테스트로
+server.js           서버 및 API 요청 처리 (입력 규칙, 비밀번호 해시, 횟수 제한, 파일 저장)
+public/
+├── index.html      화면 구성
+├── styles.css      화면 디자인
+└── app.js          화면 동작 및 서버와의 통신
+data/entries.json   글 저장 (서버가 처음 글을 쓸 때 만들고, Git에는 올리지 않음)
+requests.http       spec.md의 API를 손으로 확인하는 요청 모음
+test/               spec.md의 규칙을 자동으로 확인하는 테스트
 ```
 
-서버를 껐다 켜면 글이 전부 사라집니다. 데이터를 메모리에만 들고 있기 때문이에요. 다음 주에 데이터베이스로 해결합니다.
+## 명세에 없어서 정한 것
+
+- 수정·삭제 요청은 **글 번호 → 입력 규칙 → 글 존재 → 횟수 제한 → 비밀번호** 순서로 확인합니다.
+  그래서 400, 404 요청은 비밀번호 확인 횟수에 넣지 않습니다.
+- 비밀번호 해시는 Node에 들어 있는 `scrypt`를 씁니다. (추가 설치 없음)
+- 글자 수는 이모지도 한 글자로 셉니다.
+- 지운 글 번호는 서버를 재시작해도 다시 쓰지 않습니다.

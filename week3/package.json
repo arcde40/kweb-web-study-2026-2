@@ -1,11 +1,14 @@
 {
-  "name": "kweb-week3-guestbook",
+  "name": "kweb-week3-guestbook-assignment",
   "version": "1.0.0",
-  "description": "KWEB Web Study 3주차 샘플: 방명록 API (Express)",
-  "main": "src/server.js",
+  "description": "KWEB Web Study 3주차 과제: spec.md 방명록 서버 (Express)",
+  "main": "server.js",
   "scripts": {
-    "start": "node src/server.js",
+    "start": "node server.js",
     "test": "jest"
+  },
+  "jest": {
+    "roots": ["<rootDir>/test"]
   },
   "license": "MIT",
   "dependencies": {
