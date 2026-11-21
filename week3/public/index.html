@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>방명록</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <main>
+    <h1>방명록</h1>
+
+    <!-- 글 쓰기 -->
+    <form id="write-form" class="card">
+      <div class="row">
+        <input name="name" placeholder="이름 (1~20자)" maxlength="20" required />
+        <input name="password" type="password" placeholder="비밀번호 숫자 4자리" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" required />
+      </div>
+      <textarea name="content" placeholder="남기고 싶은 말 (1~500자)" maxlength="500" rows="3" required></textarea>
+      <button type="submit">남기기</button>
+    </form>
+
+    <p id="message" class="message" role="status"></p>
+
+    <!-- 글 목록 -->
+    <div class="list-header">
+      <h2>글 목록</h2>
+      <select id="sort">
+        <option value="newest">최신순</option>
+        <option value="oldest">오래된순</option>
+      </select>
+    </div>
+    <ul id="entries"></ul>
+  </main>
+</body>
+</html>

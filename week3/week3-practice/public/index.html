@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>방명록</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 16px; background: #fafafa; color: #222; }
+    h1 { font-size: 1.6rem; }
+    ul { list-style: none; padding: 0; }
+    li { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 12px 16px; margin-bottom: 10px; }
+    .author { font-weight: bold; margin-bottom: 4px; }
+    .content { white-space: pre-wrap; }
+    .error { color: #c00; }
+    button { padding: 6px 12px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- 빌드 도구 없이 쓰려고 React와 Babel(JSX 변환)을 CDN에서 불러옵니다 -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.26.4/babel.min.js"></script>
+  <script src="/api.js"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    function PostList() {
+      const [posts, setPosts] = useState([]);
+      const [loading, setLoading] = useState(true);
+      const [error, setError] = useState(null);
+
+      // GET /posts → 200, 글 목록
+      async function loadPosts() {
+        setLoading(true);
+        setError(null);
+        try {
+          setPosts(await api.fetchPosts());
+        } catch (err) {
+          setError('글 목록을 불러오지 못했습니다');
+        } finally {
+          setLoading(false);
+        }
+      }
+
+      // 화면이 처음 뜰 때 한 번 불러오기
+      useEffect(() => {
+        loadPosts();
+      }, []);
+
+      if (loading) return <p>불러오는 중...</p>;
+      if (error) return <p className="error">{error}</p>;
+      if (posts.length === 0) return <p>아직 글이 없습니다.</p>;
+
+      return (
+        <ul>
+          {posts.map((post) => (
+            <li key={post.id}>
+              <div className="author">{post.author || '익명'}</div>
+              <div className="content">{post.content}</div>
+            </li>
+          ))}
+        </ul>
+      );
+    }
+
+    function App() {
+      // key를 바꾸면 PostList가 새로 만들어지면서 목록을 다시 불러옵니다
+      const [refreshKey, setRefreshKey] = useState(0);
+
+      return (
+        <div>
+          <h1>방명록</h1>
+          <button onClick={() => setRefreshKey(refreshKey + 1)}>새로고침</button>
+          <PostList key={refreshKey} />
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
